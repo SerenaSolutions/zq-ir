@@ -1,0 +1,6 @@
+{
+  "python.defaultInterpreterPath": "python3",
+  "editor.fontFamily": "DejaVu Sans Mono, monospace",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "files.associations": {"*.zph": "lisp"}
+}

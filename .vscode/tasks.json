@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "ZQ-IR: validar IR", "type": "shell", "command": "zq-ir validate examples/decide_const1.json",
+     "problemMatcher": [], "group": "test"},
+    {"label": "ZQ-IR: decidir constante", "type": "shell", "command": "zq-ir decide examples/decide_const1.json",
+     "problemMatcher": [], "group": "test"},
+    {"label": "ZQ-IR: decidir paridade", "type": "shell", "command": "zq-ir decide examples/decide_parity.json",
+     "problemMatcher": [], "group": "test"},
+    {"label": "ZQ-IR: gate de memoria", "type": "shell", "command": "zq-ir decide examples/decide_memoria.json",
+     "problemMatcher": [], "group": "test"},
+    {"label": "ZEPHIRUM: suite completa", "type": "shell", "command": "make test",
+     "problemMatcher": [], "group": {"kind": "test", "isDefault": true}},
+    {"label": "ZEPHIRUM: gate de memoria (runtime)", "type": "shell",
+     "command": "python3 -c \"from zyql_runtime import decide; r=decide(lambda x:1,n=2,shots=512,require_memory_check=True); print('veredito:',r.verdict.name,'| motivo:',r.refusal_reason,'| oraculo:',r.oracle_calls)\"",
+     "problemMatcher": [], "group": "test"}
+  ]
+}

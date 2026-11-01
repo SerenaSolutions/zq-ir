@@ -68,6 +68,18 @@ distância de traço (BLP) antes do veredito. Se detectar memória ambiental, re
 
 **Gate de dispositivo:** `device_gate` testa o próprio QPU (GHZ) antes de gastar oráculo.
 
+## Rodar no VS Code
+
+Abra a pasta no VS Code e use `Terminal → Run Task` (`Ctrl+Shift+B`). As tasks em
+`.vscode/tasks.json` chamam o CLI de verdade — nada de mock:
+
+| Task | Mostra |
+|---|---|
+| ZQ-IR: validar IR | contrato válido (fail-closed em IR inválido) |
+| ZQ-IR: decidir constante | veredito `1` com recibo selado |
+| ZQ-IR: decidir paridade | `REFUSED / BALANCED_ORACLE` |
+| ZQ-IR: gate de memoria | `REFUSED / NOISE_HAS_MEMORY` |
+
 ## Testes
 
 ```console
