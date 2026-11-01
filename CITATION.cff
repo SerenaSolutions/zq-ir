@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, cite it as below."
+title: "ZQ-IR"
+abstract: "Universal trivalent decision IR (1/0/REFUSED) pluggable across quantum ecosystems"
+version: 1.0.0
+date-released: 2026-10-31
+license: Apache-2.0
+authors:
+  - family-names: dos Anjos
+    given-names: Maria Clara
+    affiliation: SerenaSolutions
+repository-code: "https://github.com/SerenaSolutions/zq-ir"
+keywords:
+  - quantum computing
+  - trivalent logic
+  - reproducibility
