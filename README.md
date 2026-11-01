@@ -5,7 +5,7 @@
 ![version](https://img.shields.io/badge/version-1.0.0-6e46b8)
 ![repr](https://img.shields.io/badge/IR-JSON%20%2B%20OpenQASM%203-cyan)
 ![verdicts](https://img.shields.io/badge/verdicts-1%20%7C%200%20%7C%20REFUSED-gold)
-![license](https://img.shields.io/badge/license-MIT-green)
+![license](https://img.shields.io/badge/license-Apache--2.0-blue)
 
 O ZQ-IR é o **contrato neutro** de decisão quântica: descreva a decisão em JSON, receba
 `1`, `0` ou `REFUSED` com recibo selado. O veredito não pertence a nenhum framework —
@@ -48,7 +48,7 @@ $ zq-ir decide examples/decide_parity.json     # oráculo balanceado
 | Qiskit | nativo (`zqir.core`) |
 | PennyLane | `adapters/pennylane_adapter.py` — testado: mesmo veredito |
 | Cirq | `adapters/cirq_adapter.py` — testado: mesmo veredito |
-| Amazon Braket | contrato definido em `docs/ADAPTERS.md` (não testado neste ambiente) |
+| Amazon Braket | `adapters/braket_adapter.py` — testado: mesmo veredito |
 | OpenQASM 3 | `zq-ir export-qasm3 spec.json` |
 | Qualquer linguagem | CLI JSON→JSON (`examples/portability/`: shell, Node, R, Julia) |
 
@@ -87,4 +87,4 @@ recibos e export OpenQASM 3.
 - Banda Hoeffding cobre ruído amostral, **não** viés sistemático de readout.
 - Gate de memória vale para profundidades ≤ `steps` no modelo de colisão.
 
-MIT · Serena Quantum Solutions
+Apache-2.0 (concessão explícita de patentes) · Serena Quantum Solutions

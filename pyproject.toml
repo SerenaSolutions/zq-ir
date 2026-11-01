@@ -7,7 +7,7 @@ name = "zq-ir"
 version = "1.0.0"
 description = "ZQ-IR: interpretador universal de decisao trivalente (1/0/REFUSED) para qualquer ecossistema quantico"
 readme = "README.md"
-license = "MIT"
+license = "Apache-2.0"
 requires-python = ">=3.10"
 dependencies = ["qiskit>=2.6"]
 

@@ -33,3 +33,11 @@ def test_pennylane_concorda_com_o_contrato(spec_file, esperado):
     from adapters import pennylane_adapter
     r = pennylane_adapter.decide(_load(spec_file), shots=512)
     assert r["verdict"] == esperado
+
+
+@pytest.mark.parametrize("spec_file,esperado", CASES)
+def test_braket_concorda_com_o_contrato(spec_file, esperado):
+    pytest.importorskip("braket")
+    from adapters import braket_adapter
+    r = braket_adapter.decide(_load(spec_file), shots=512)
+    assert r["verdict"] == esperado

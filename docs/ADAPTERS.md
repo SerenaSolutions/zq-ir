@@ -23,6 +23,6 @@ decide(spec: dict) -> dict   # retorna ao menos: verdict, refusal_reason, p0, ba
 | Qiskit (núcleo) | sim | 12/12 testes |
 | Cirq 1.7 | sim | const1→`1`, paridade→`REFUSED` |
 | PennyLane 0.45 | sim | const1→`1`, paridade→`REFUSED` |
-| Amazon Braket | **não testado aqui** | contrato acima; falta ambiente |
+| Amazon Braket 1.x | sim | const1→`1`, paridade→`REFUSED` (LocalSimulator) |
 
 O modo hardware (IBM) é exercido pelo núcleo (`execution.backend = "ibm:<nome>"`).
