@@ -10,20 +10,46 @@
   "epsilon": 0.05,
   "family": 1,
   "backend": "ibm:ibm_marrakesh",
-  "job_id": "dbj9h11kdqps7390505g",
+  "job_id": "dbjagn8nceqs73ajk900",
   "device_gate": {
     "enabled": true,
-    "fidelity": 0.9875,
+    "fidelity": 0.9849,
     "threshold": 0.8,
     "passed": true,
-    "job_id": "dbj9gd56p51s73ckcdrg"
+    "job_id": "dbjagjpkdqps739076s0"
   },
   "memory_gate": {
     "enabled": false
   },
   "receipt": {
     "spec": "Z-QEA/2.2",
-    "seal_sha3_256": "b5d74398ea40aec5352d4a487362e337da1136b8f31f57bd33a7df269c7cfb06",
+    "sealed_at": "2026-11-01T02:48:03Z",
+    "payload": {
+      "zqir": "1.0",
+      "id": "demo-const1",
+      "purpose": "oraculo constante 1",
+      "verdict": "1",
+      "refusal_reason": null,
+      "p0": 1.0,
+      "band": 0.03001,
+      "shots": 2048,
+      "epsilon": 0.05,
+      "family": 1,
+      "backend": "ibm:ibm_marrakesh",
+      "job_id": "dbjagn8nceqs73ajk900",
+      "device_gate": {
+        "enabled": true,
+        "fidelity": 0.9849,
+        "threshold": 0.8,
+        "passed": true,
+        "job_id": "dbjagjpkdqps739076s0"
+      },
+      "memory_gate": {
+        "enabled": false
+      },
+      "sealed_at": "2026-11-01T02:48:03Z"
+    },
+    "seal_sha3_256": "26240f27294d15975c7473ee2295edf55a4bd70212e4e4b0925517d14428eca7",
     "pq_signature": true
   }
 }

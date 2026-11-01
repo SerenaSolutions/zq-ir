@@ -103,3 +103,15 @@ def test_export_openqasm3_portavel():
     assert q.startswith("OPENQASM 3.0")
     assert "stdgates.inc" in q
     assert "z q[0]" in q.replace("  ", " ")
+
+
+def test_recibo_verificavel_offline():
+    out = core.evaluate(spec())
+    v = core.verify_receipt(out["receipt"])
+    assert v["ok"] is True, v["reason"]
+    # qualquer alteracao no payload quebra o selo
+    adulterado = json.loads(json.dumps(out["receipt"]))
+    adulterado["payload"]["verdict"] = "0"
+    assert core.verify_receipt(adulterado)["ok"] is False
+    # recibo sem payload nao pode ser verificado (fail-closed)
+    assert core.verify_receipt({"spec": "x", "seal_sha3_256": "00"})["ok"] is False

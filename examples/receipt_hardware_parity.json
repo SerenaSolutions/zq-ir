@@ -4,13 +4,13 @@
   "purpose": "oraculo balanceado (paridade)",
   "verdict": "REFUSED",
   "refusal_reason": "BALANCED_ORACLE",
-  "p0": 0.005859,
+  "p0": 0.016113,
   "band": 0.03001,
   "shots": 2048,
   "epsilon": 0.05,
   "family": 1,
   "backend": "ibm:ibm_marrakesh",
-  "job_id": "dbj9h61ffo6c73b972n0",
+  "job_id": "dbjagql6p51s73ckelag",
   "device_gate": {
     "enabled": false
   },
@@ -19,7 +19,29 @@
   },
   "receipt": {
     "spec": "Z-QEA/2.2",
-    "seal_sha3_256": "c42f1165c3f8598fd3091dc1d0075f9f74c14a53955a283e7662f00e1110e28c",
+    "sealed_at": "2026-11-01T02:48:18Z",
+    "payload": {
+      "zqir": "1.0",
+      "id": "demo-parity",
+      "purpose": "oraculo balanceado (paridade)",
+      "verdict": "REFUSED",
+      "refusal_reason": "BALANCED_ORACLE",
+      "p0": 0.016113,
+      "band": 0.03001,
+      "shots": 2048,
+      "epsilon": 0.05,
+      "family": 1,
+      "backend": "ibm:ibm_marrakesh",
+      "job_id": "dbjagql6p51s73ckelag",
+      "device_gate": {
+        "enabled": false
+      },
+      "memory_gate": {
+        "enabled": false
+      },
+      "sealed_at": "2026-11-01T02:48:18Z"
+    },
+    "seal_sha3_256": "e6bef227b6df05a196f051aae3d18ad1f4e40e222d844066456bff4cd290bddb",
     "pq_signature": true
   }
 }

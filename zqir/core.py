@@ -292,12 +292,16 @@ def _finish(spec, verdict, reason, p0, band, shots, eps, family, backend, job_id
 
 # ---------------------------------------------------------------- selagem
 def seal(payload: dict, rc: dict) -> dict:
+    """Sela o payload. O corpo selado e EMBUTIDO no recibo: sem isso o selo nao
+    pode ser recomputado offline (achado de auditoria 2026-11-01)."""
     body = {k: v for k, v in payload.items() if k != "receipt"}
     body["sealed_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     if rc.get("previous_seal"):
         body["previous_seal"] = rc["previous_seal"]
     blob = json.dumps(body, sort_keys=True, ensure_ascii=False).encode()
-    rec = {"spec": RECEIPT_SPEC, "seal_sha3_256": hashlib.sha3_256(blob).hexdigest(),
+    rec = {"spec": RECEIPT_SPEC, "sealed_at": body["sealed_at"],
+           "payload": body,
+           "seal_sha3_256": hashlib.sha3_256(blob).hexdigest(),
            "pq_signature": False}
     try:                                     # camada pós-quântica, se disponível
         import sys
@@ -316,3 +320,18 @@ def export_qasm3(spec: dict) -> str:
     qc = build_dj_circuit(d["n"], d["oracle"])
     from qiskit import qasm3  # OpenQASM 3 nativo do Qiskit 2.x
     return qasm3.dumps(qc)
+
+
+def verify_receipt(rec: dict) -> dict:
+    """Verificacao offline: recomputa o selo do payload embutido.
+
+    Retorna {"ok": bool, "reason": str}. Nao confia em nada externo: qualquer
+    alteracao em payload ou selo quebra a verificacao.
+    """
+    if not isinstance(rec, dict) or "payload" not in rec or "seal_sha3_256" not in rec:
+        return {"ok": False, "reason": "recibo incompleto (sem payload ou selo)"}
+    blob = json.dumps(rec["payload"], sort_keys=True, ensure_ascii=False).encode()
+    calc = hashlib.sha3_256(blob).hexdigest()
+    if calc != rec["seal_sha3_256"]:
+        return {"ok": False, "reason": "selo divergente: conteudo alterado"}
+    return {"ok": True, "reason": "selo integro"}
