@@ -1,0 +1,8 @@
+{
+  "zqir": "1.0",
+  "decision": {"id": "demo-const1", "purpose": "oraculo constante 1", "n": 2,
+    "oracle": {"type": "constant", "value": 1}, "shots": 2048, "epsilon": 0.05,
+    "family": 1, "device_gate": {"type": "ghz", "threshold": 0.80}},
+  "execution": {"backend": "simulator", "seed": 1701},
+  "receipt": {"enabled": true}
+}

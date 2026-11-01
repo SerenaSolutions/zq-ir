@@ -1,0 +1,8 @@
+{
+  "zqir": "1.0",
+  "decision": {"id": "demo-memoria", "purpose": "gate de memoria antes do veredito", "n": 2,
+    "oracle": {"type": "constant", "value": 0}, "shots": 2048, "epsilon": 0.05,
+    "memory_gate": {"enabled": true, "steps": 3}},
+  "execution": {"backend": "simulator", "seed": 1701},
+  "receipt": {"enabled": true}
+}

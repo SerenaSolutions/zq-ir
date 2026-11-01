@@ -1,0 +1,2 @@
+*.zph linguist-language=Lisp
+*.zph linguist-detectable=true

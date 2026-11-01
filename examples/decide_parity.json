@@ -1,0 +1,7 @@
+{
+  "zqir": "1.0",
+  "decision": {"id": "demo-parity", "purpose": "oraculo balanceado (paridade)", "n": 2,
+    "oracle": {"type": "parity", "bits": "10"}, "shots": 2048, "epsilon": 0.05},
+  "execution": {"backend": "simulator", "seed": 1701},
+  "receipt": {"enabled": true}
+}

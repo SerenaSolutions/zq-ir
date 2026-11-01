@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zq-ir"
+version = "1.0.0"
+description = "ZQ-IR: interpretador universal de decisao trivalente (1/0/REFUSED) para qualquer ecossistema quantico"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["qiskit>=2.6"]
+
+[project.optional-dependencies]
+sim = ["qiskit-aer"]
+hardware = ["qiskit-ibm-runtime"]
+qasm = ["openqasm3"]
+
+[project.scripts]
+zq-ir = "zqir.cli:main"
+
+[tool.setuptools]
+packages = ["zqir"]
