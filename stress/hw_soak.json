@@ -1,0 +1,94 @@
+{
+ "backend": "ibm_marrakesh",
+ "k_jobs": 10,
+ "shots": 256,
+ "sucessos": 10,
+ "falhas": [],
+ "latencia_s": [
+  42.57,
+  58.28,
+  6.63,
+  6.59,
+  7.22,
+  6.1,
+  6.36,
+  7.11,
+  26.26,
+  7.61
+ ],
+ "vereditos": {
+  "1": 10
+ },
+ "jobs": [
+  {
+   "job_id": "dbjba71kdqps73908hpg",
+   "verdict": "1",
+   "p0": 0.9883,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbahgnceqs73ajllc0",
+   "verdict": "1",
+   "p0": 0.9922,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbb00nceqs73ajlm10",
+   "verdict": "1",
+   "p0": 0.9961,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbb1onceqs73ajlm5g",
+   "verdict": "1",
+   "p0": 0.9961,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbb3d6p51s73ckg0f0",
+   "verdict": "1",
+   "p0": 1.0,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbb51ffo6c73b9an3g",
+   "verdict": "1",
+   "p0": 1.0,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbb6hkdqps73908jb0",
+   "verdict": "1",
+   "p0": 0.9805,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbb88nceqs73ajlmd0",
+   "verdict": "1",
+   "p0": 0.9883,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbba0nceqs73ajlmfg",
+   "verdict": "1",
+   "p0": 0.9922,
+   "status": "DONE"
+  },
+  {
+   "job_id": "dbjbbghffo6c73b9ang0",
+   "verdict": "1",
+   "p0": 0.9805,
+   "status": "DONE"
+  }
+ ],
+ "qpu_consumido_s": 20,
+ "qpu_por_decisao_s": 2.0,
+ "restante_apos_s": 136,
+ "extrapolacao": {
+  "decisoes_pedidas": 16000,
+  "qpu_necessario_s": 32000.0,
+  "qpu_necessario_h": 8.9,
+  "cotas_28_dias_necessarias": 53.0,
+  "meses_no_plano_open": 53.0
+ }
+}
