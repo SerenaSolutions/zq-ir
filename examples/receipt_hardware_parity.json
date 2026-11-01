@@ -1,0 +1,25 @@
+{
+  "zqir": "1.0",
+  "id": "demo-parity",
+  "purpose": "oraculo balanceado (paridade)",
+  "verdict": "REFUSED",
+  "refusal_reason": "BALANCED_ORACLE",
+  "p0": 0.005859,
+  "band": 0.03001,
+  "shots": 2048,
+  "epsilon": 0.05,
+  "family": 1,
+  "backend": "ibm:ibm_marrakesh",
+  "job_id": "dbj9h61ffo6c73b972n0",
+  "device_gate": {
+    "enabled": false
+  },
+  "memory_gate": {
+    "enabled": false
+  },
+  "receipt": {
+    "spec": "Z-QEA/2.2",
+    "seal_sha3_256": "c42f1165c3f8598fd3091dc1d0075f9f74c14a53955a283e7662f00e1110e28c",
+    "pq_signature": true
+  }
+}
