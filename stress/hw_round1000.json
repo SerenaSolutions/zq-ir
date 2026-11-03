@@ -1,0 +1,44 @@
+{
+ "backend": "ibm_marrakesh",
+ "shots": 256,
+ "n": 2,
+ "banda": 0.08488134473378872,
+ "orcamento_qpu_s": 90,
+ "rodadas": [
+  {
+   "caso": "const1",
+   "verdict": "1",
+   "esperado": "1",
+   "ok": true,
+   "p0": 0.9961,
+   "refusal_reason": null,
+   "job_id": "dbku16onceqs73aml27g",
+   "latencia_s": 8.3,
+   "qpu_acumulado_s": 2
+  },
+  {
+   "caso": "const0",
+   "verdict": "0",
+   "esperado": "0",
+   "ok": true,
+   "p0": 0.9961,
+   "refusal_reason": null,
+   "job_id": "dbku18tgg49c73djlg50",
+   "latencia_s": 28.7,
+   "qpu_acumulado_s": 4
+  },
+  {
+   "caso": "parity",
+   "verdict": "REFUSED",
+   "esperado": "REFUSED",
+   "ok": true,
+   "p0": 0.0078,
+   "refusal_reason": "BALANCED_ORACLE",
+   "job_id": "dbku1g5gg49c73djlgf0",
+   "latencia_s": 14.0,
+   "qpu_acumulado_s": 6
+  }
+ ],
+ "qpu_gasto_s": 6,
+ "restante_s": 130
+}
