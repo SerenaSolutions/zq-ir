@@ -1,0 +1,116 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Solutions
+name: Publicar no PyPI (manual, com trava)
+
+# Mecanismo padrao da casa (v1, 2026-11-10).
+# Publicacao por Trusted Publishing (OIDC): nenhum token de API fica guardado,
+# nenhuma credencial trafega. Exige disparo manual, confirmacao textual e
+# aprovacao humana no environment pypi-release ("ninguem publica sozinho").
+#
+# Padrao identico em todos os repositorios ZYQL/ZEPHIRUM:
+#   arquivo  .github/workflows/publicar-pypi.yml
+#   ambiente pypi-release (branch policy: main + required reviewers)
+#   publisher no PyPI: Owner SerenaSolutions / Repository <repo> / Workflow publicar-pypi.yml / Environment pypi-release
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Digite PUBLICAR para confirmar'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pypi-publicacao
+  cancel-in-progress: false
+
+env:
+  PACOTE: zq-ir
+
+jobs:
+  preflight:
+    name: Verificacoes antes de publicar
+    runs-on: ubuntu-latest
+    outputs:
+      versao: ${{ steps.v.outputs.versao }}
+    steps:
+      - name: Exigir confirmacao textual
+        if: inputs.confirmar != 'PUBLICAR'
+        run: |
+          echo "::error::Confirmacao ausente. Nada foi publicado."
+          exit 1
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          V=$(python3 -c "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          echo "versao=$V" >> "$GITHUB_OUTPUT"
+          echo "Versao a publicar: $V"
+      - name: Recusar se a versao ja existe no PyPI
+        run: |
+          V="${{ steps.v.outputs.versao }}"
+          CODIGO=$(curl -s -o /dev/null -w "%{http_code}" "https://pypi.org/pypi/${PACOTE}/$V/json")
+          if [ "$CODIGO" = "200" ]; then
+            echo "::error::A versao $V ja esta no PyPI. Suba a versao antes de publicar."
+            exit 1
+          fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Suite de testes
+        run: |
+          python -m pip install -q --upgrade pip
+          python -m pip install -q build pytest
+          python -m pip install -q -e .
+          python -m pytest tests -q
+
+  publicar:
+    name: Publicar (Trusted Publishing por OIDC)
+    needs: preflight
+    runs-on: ubuntu-latest
+    environment: pypi-release
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install build
+      - run: python -m build
+      - name: Selo Z-QEA dos artefatos (SHA3-256)
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, datetime
+          linhas = {}
+          for p in sorted(pathlib.Path('dist').iterdir()):
+              if p.is_file():
+                  linhas[p.name] = hashlib.sha3_256(p.read_bytes()).hexdigest()
+          recibo = {
+              "tipo": "Z-QEA/publicacao",
+              "pacote": "zq-ir",
+              "versao": "${{ needs.preflight.outputs.versao }}",
+              "commit": "${{ github.sha }}",
+              "workflow": "${{ github.workflow_ref }}",
+              "execucao": "${{ github.run_id }}",
+              "quando_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "artefatos": linhas,
+          }
+          corpo = json.dumps(recibo, sort_keys=True, ensure_ascii=False)
+          recibo["selo_sha3_256"] = hashlib.sha3_256(corpo.encode()).hexdigest()
+          pathlib.Path('dist/recibo-publicacao.json').write_text(json.dumps(recibo, indent=2, ensure_ascii=False))
+          print("selo:", recibo["selo_sha3_256"])
+          PY
+      - name: Publicar
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true
+      - name: Guardar o recibo da publicacao
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: recibo-publicacao-${{ needs.preflight.outputs.versao }}
+          path: dist/recibo-publicacao.json
+          if-no-files-found: warn
